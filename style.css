@@ -1,0 +1,255 @@
+
+/* ---------- Global Reset & Base ---------- */
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: linear-gradient(135deg, #fefefe, #f9fafb);
+    color: #222;
+    margin: 0;
+    padding: 40px;
+    text-align: center;
+}
+
+/* Judul utama halaman */
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #42b549; /* Tokopedia green */
+    margin-bottom: 10px;
+}
+.subtitle {
+    font-size: 18px;
+    color: #105454;
+    margin-bottom: 30px;
+}
+
+/* Paragraf penjelasan di bawah judul */
+p {
+    font-size: 16px;
+    color: #555;
+    margin: 8px 0 20px;
+}
+
+/* ---------- Form Input ---------- */
+form {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: inline-block;
+    padding: 20px 40px;
+    text-align: left;
+    transition: transform 0.2s ease;
+}
+
+/* Label & input text */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Efek fokus saat mengetik */
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #42b549; /* Tokopedia green */
+    box-shadow: 0 0 6px rgba(66, 181, 73, 0.4);
+}
+
+/* ---------- Button Style ---------- */
+.button {
+  border: none;
+  color: white;
+  padding: 14px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 25px; /* Tombol membulat seperti kapsul */
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Tombol utama warna Shopee */
+.button1 {
+  background-color: #e98774; /* Shopee orange */
+}
+
+/* Hover efek: gradient Shopee + Tokopedia */
+.button1:hover {
+  background: linear-gradient(#ee4d2d);
+  transform: translateY(-2px);
+}
+
+/* ---------- Card Section (Hasil Crawling) ---------- */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 1000px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+/* ---------- Scrollable Table (untuk hasil review) ---------- */
+.scroll-table {
+    max-height: 450px; /* batas tinggi agar tabel bisa scroll */
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* ---------- Tabel ---------- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Header kolom tabel */
+th {
+    background: linear-gradient(#4d3834);
+    color: white;
+    padding: 10px;
+    position: sticky;
+    top: 0; /* tetap di atas saat scroll */
+    z-index: 2;
+    text-align: left;
+}
+
+/* Sel tabel biasa */
+td {
+    border-bottom: 1px solid #eee;
+    padding: 8px 10px;
+}
+
+/* Baris bergantian (zebra stripes) */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Efek hover di baris tabel */
+tr:hover {
+    background-color: #f0f9f3;
+}
+
+/* ---------- Dropdown label (positive/negative) ---------- */
+select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    background-color: #fff;
+    cursor: pointer;
+}
+select:focus {
+    outline: none;
+    border-color: #42b549;
+    box-shadow: 0 0 5px rgba(66,181,73,0.3);
+}
+
+/* ---------- Tombol VALIDATE & SAVE ---------- */
+button[type="submit"][name="validate"] {
+    background: linear-gradient( #67976a);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 26px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 16px;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button[type="submit"][name="validate"]:hover {
+    background: linear-gradient(#336838);
+    transform: translateY(-2px);
+}
+
+/* ---------- Gambar Produk ---------- */
+img {
+    width: 200px;      
+    height: auto;      
+    border-radius: 12px;
+    margin: 12px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#product-info-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#product-info-form p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* ---------- Responsiveness ---------- */
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+    form {
+        width: 100%;
+        padding: 16px;
+    }
+    .card {
+        width: 100%;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow-wrap: break-word;
+    }
+}
+
+/* ---------- Additional Styles ---------- */
+.chart-container {
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center;     /* vertical center (opsional, kalau mau di tengah page penuh) */
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.chart-box {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    width: 400px;   /* bisa disesuaikan */
+    height: 400px;  /* biar canvas pas */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 40px;
+    font-size: 22px;
+}
+
+
