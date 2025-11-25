@@ -104,7 +104,7 @@
             }
             echo "<br>";
             echo '<form action="save_validation.php" method="POST">'; // NEW FORM
-            echo '<h2>Hasil Crawling Review + Sentimen</h2>';
+            echo '<h2>Hasil Crawling Ulasan + Sentimen</h2>';
             echo '<div class="card">';
             echo '<div class="scroll-table">';
             echo "<table>";
