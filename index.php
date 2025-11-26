@@ -13,9 +13,9 @@
     <h1 class="title">Selamat datang di SentimenSense</h1>
     <p class="subtitle">Masukkan URL produk dari Shopee atau Tokopedia untuk menganalisis sentimen review pelanggan.</p>
     <form action="index.php" method="POST">
-        <p>URL PRODUK (shopee / tokopedia) : <input type="text" name="url" placeholder="Masukkan URL Produk" required><br>
+        <p>URL Produk (Shopee/Tokopedia) : <input type="text" name="url" placeholder="Masukkan URL Produk" required><br>
         <!-- input reviw count -->
-        <p>Jumlah review yang ingin di crawling : <input type="number" name="review_count" placeholder="Masukkan Jumlah Review" min="1" required><br>
+        <p>Jumlah Review yang Ingin Diambil : <input type="number" name="review_count" placeholder="Masukkan Jumlah Review" min="1" required><br>
         <button class="button button1" type="submit" name="search">Analisis</button>
     </form>
 
@@ -69,7 +69,7 @@
             // echo "<p> image URL: " . htmlspecialchars($rows[1][0]) . "</p>";
 
             echo "<form id='product-info-form'>";
-            echo "<h2>Hasil Crawling Information</h2>";
+            echo "<h2>INFORMASI PRODUK</h2>";
             echo "<p><b>Product URL: </b>" . htmlspecialchars($url) . "<p>";
             echo "<p><b>Nama Produk: </b>" . htmlspecialchars($rows[1][1]) . "</p>"; //[baris][kolom]
             echo "<p><b> Harga Produk: </b>" . htmlspecialchars($rows[1][2]) . "</p>";
@@ -104,11 +104,11 @@
             }
             echo "<br>";
             echo '<form action="save_validation.php" method="POST">'; // NEW FORM
-            echo '<h2>Hasil Crawling Ulasan + Sentimen</h2>';
+            echo '<h2>HASIL CRAWLING ULASAN + SENTIMEN</h2>';
             echo '<div class="card">';
             echo '<div class="scroll-table">';
             echo "<table>";
-            echo "<tr><th>No</th><th>Account</th><th>Review</th><th>Label</th></tr>";
+            echo "<tr><th>NO</th><th>AKUN</th><th>ULASAN</th><th>LABEL</th></tr>";
 
             $no = 1; //counter urutan nomor
 
@@ -154,7 +154,7 @@
             echo "<input type='hidden' name='source' value='".htmlspecialchars($source)."'>";
 
             // ✅ Tombol Simpan
-            echo '<button type="submit" name="validate">VALIDASI ULANG & SIMPAN </button>';
+            echo '<button type="submit" name="validate">VALIDASI ULANG & SIMPAN</button>';
             echo '</form>';
 
             // ===================== SHOW SENTIMENT DISTRIBUTION CHART =================
@@ -187,7 +187,7 @@
                 new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: ['Positive', 'Negative'],
+                        labels: ['Positif', 'Negatif'],
                         datasets: [{
                             label: 'Distribusi Sentimen',
                             data: [$positive_count, $negative_count],
@@ -214,7 +214,7 @@
                             },
                             title: {
                                 display: true,
-                                text: 'Distribusi Sentimen Review',
+                                text: 'DISTRIBUSI SENTIMEN',
                                 color: '#333',
                                 font: { size: 18, weight: 'bold' }
                             }
@@ -225,7 +225,7 @@
                 ";
 
                 // Tambahkan display sebelum chart
-                echo "<h2>Ringkasan Hasil Sentimen</h2>";
+                echo "<h2>RINGKASAN HASIL SENTIMEN</h2>";
                 echo "<p><b>TOTAL REVIEW:</b> $total_review</p>";
                 echo "<p><b>TOTAL REVIEW POSITIF:</b> $positive_count</p>";
                 echo "<p><b>TOTAL REVIEW NEGATIF:</b> $negative_count</p>";

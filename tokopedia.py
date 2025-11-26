@@ -1,7 +1,6 @@
 import time
 import pandas as pd
 import sys
-import json
 import subprocess
 from bs4 import BeautifulSoup
 from selenium import webdriver

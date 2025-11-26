@@ -1,8 +1,5 @@
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
 import nltk
-from nltk.corpus import stopwords
-import string
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
 import re
