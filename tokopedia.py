@@ -13,8 +13,8 @@ if len(sys.argv) >= 3:
     url = sys.argv[1]
     review_count = int(sys.argv[2])
 else:
-     url = " https://tk.tokopedia.com/ZSfLw2ccS/"
-     review_count = 100  # default jika tidak ada argumen
+     url = " https://tk.tokopedia.com/ZS5EvKpKq/"
+     review_count = 2  # default jika tidak ada argumen
 
 # -----------HEADLESS-----------
 options = webdriver.ChromeOptions()
@@ -36,18 +36,20 @@ time.sleep(10)
 
 #---------- pencet silang untuk iklan yang muncul ------------- 
 #button nya ada di dalam div class="css-11hzwo5", jadi mencet button yg ada di situ
+try:
+    ad_container = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "div.css-11hzwo5"))
+    )
 
-ad_container = WebDriverWait(driver, 5).until(
-    EC.presence_of_element_located((By.CSS_SELECTOR, "div.css-11hzwo5"))
-)
+    # cari tombol di dalam div tsb
+    close_button = ad_container.find_element(By.TAG_NAME, "button")
 
-# cari tombol di dalam div tsb
-close_button = ad_container.find_element(By.TAG_NAME, "button")
-
-# klik tombolnya
-driver.execute_script("arguments[0].click();", close_button)
-print("[INFO] Iklan tertutup otomatis.")
-time.sleep(1)
+    # klik tombolnya
+    driver.execute_script("arguments[0].click();", close_button)
+    print("[INFO] Iklan tertutup otomatis.")
+    time.sleep(1)
+except Exception:
+    print("[INFO] Tidak ada iklan yang muncul.")
 
 driver.execute_script("window.scrollTo(0, document.body.scrollHeight/1.5);")
 
@@ -63,11 +65,17 @@ for _ in range(5):
             driver.execute_script("window.scrollBy(0, 1000);")
             time.sleep(2)
 # -----------------SCRAPING NAME-----------------
-product_name = soup.find('h1', attrs = {'data-testid':'lblPDPDetailProductName'}).text
+try:
+    product_name = soup.find('h1', attrs = {'data-testid':'lblPDPDetailProductName'}).text
+except Exception as e:
+    product_name = "No Name"
 print("PRODUCT NAME : " + product_name)
 
 # -----------------SCRAPING PRICE-----------------
-product_price = soup.find('div', attrs = {'data-testid':'lblPDPDetailProductPrice'}).text
+try:
+    product_price = soup.find('div', attrs = {'data-testid':'lblPDPDetailProductPrice'}).text
+except Exception as e:
+    product_price = "Tidak diketahui"
 print("PRODUCT PRICE : " + product_price)
 
 # -----------------DESCRIPTION-----------------
@@ -89,8 +97,19 @@ except Exception as e:
     
 
 # -----------------LOCATION-----------------
-location = soup.find('h2', class_='css-793nib-unf-heading e1qvo2ff2').find('b').text
-print("LOCATION : " + location)
+try:
+    location = soup.find('h2', class_='css-793nib-unf-heading e1qvo2ff2').find('b').text
+    location = soup.find('div', class_='css-15hp1ih pad-bottom').find('b').text
+    # location = soup.find('h2', class_='css-793nib-unf-heading e1qvo2ff2').text
+    # if location_tag:
+    #     location = location_tag.replace("Dikirim dari ", "").strip()
+    # else:
+    #     location = location_tag
+    # print("LOCATION : " + location)
+    print("LOCATION : " + location)
+except Exception:
+    location = "Tidak Diketahui"
+    print("LOCATION : " + location)
 
 # -----------------SIMPAN KE EXCEL UNTUK INFO-----------------
 information.append({
