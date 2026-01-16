@@ -13,6 +13,7 @@ labels = df["label"].tolist()
 
 # FE / TF IDF
 tfidf = TfidfVectorizer(max_features=2000, ngram_range=(1,2))
+
 # tfidf = TfidfVectorizer()
 # Hanya ambil 5000 kata paling penting (berdasarkan frekuensi & relevansi). Untuk mengurangi ukuran vektor dan mempercepat training
 # Mengambil unigram (kata tunggal) dan bigram (2 kata berurutan). Contoh: "tidak bagus" akan jadi dua fitur:tidak, tidak bagus. Untuk mempertimbangkan konteks antar kata
@@ -62,7 +63,7 @@ param_grid = {
 grid = GridSearchCV(
     estimator=SVC(class_weight='balanced'),
     param_grid=param_grid,
-    cv=10, # ini artinya pakai 5-fold cross validation
+    cv=5, # ini artinya pakai 5-fold cross validation
     scoring='accuracy', # kriteria penilaian yang digunakan
     verbose=0, # 2 = menampilkan progres tuning di terminal
     n_jobs=-1 # gunakan semua core CPU agar proses nya cepat
@@ -96,4 +97,4 @@ with open(save_tfidf_path, 'wb') as f:
     pickle.dump(tfidf, f)
 
 
-print(f"✅ TF-IDF Vectorizer saved to: {save_tfidf_path}")
+print(f"✅TF-IDF Vectorizer saved to: {save_tfidf_path}")

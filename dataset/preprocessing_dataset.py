@@ -61,4 +61,4 @@ df["ulasan"] = review_cleaned.apply(lambda x: " ".join(x))
 output_path = r"C:\xampp\htdocs\TA\Program\dataset\new_dataset_program.xlsx"
 df.to_excel(output_path, index=False)
 
-print("✅ Preprocessing selesai. File disimpan di:", output_path)
+print("Preprocessing selesai. File disimpan di:", output_path)
