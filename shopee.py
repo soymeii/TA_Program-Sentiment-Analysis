@@ -1,5 +1,7 @@
 # pip install undetected-chromedriver
 # pip install setuptools
+# pip install undetected-chromedriver==3.5.4 --> versi tertentu biar kompatibel
+
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -22,14 +24,14 @@ def login_shopee(browser, email, password):
     )
 
     # Isi Email dan Password
-    print("Mengisi email dan password...")
-    browser.find_element(By.CSS_SELECTOR, ".W2x2F8 .X0Jdtz").send_keys(email)
-    browser.find_element(By.CSS_SELECTOR, ".wIH_BM .X0Jdtz").send_keys(password)
-    time.sleep(1)
+    # print("Mengisi email dan password...")
+    # browser.find_element(By.CSS_SELECTOR, ".W2x2F8 .X0Jdtz").send_keys(email)
+    # browser.find_element(By.CSS_SELECTOR, ".wIH_BM .X0Jdtz").send_keys(password)
+    # time.sleep(1)
     
-    # # Klik tombol Login
-    print("Menekan tombol login...")
-    browser.find_element(By.CSS_SELECTOR, ".b5aVaf.PVSuiZ.Gqupku.qz7ctP.qxS7lQ.Q4KP5g").click()
+    # # # Klik tombol Login
+    # print("Menekan tombol login...")
+    # browser.find_element(By.CSS_SELECTOR, ".b5aVaf.PVSuiZ.Gqupku.qz7ctP.qxS7lQ.Q4KP5g").click()
 
     # Tunggu sebentar untuk verifikasi manual (captcha/OTP)
     print("\n>>> Silakan selesaikan verifikasi Shopee secara manual (captcha atau OTP).")
@@ -70,7 +72,7 @@ if __name__ == "__main__":
 
 
         # browser = uc.Chrome(version_main=141, options=options, use_subprocess=True)
-        browser = uc.Chrome(options=options, use_subprocess=True)
+        browser = uc.Chrome(options=options, use_subprocess=True, version_main=144)
         wait = WebDriverWait(browser, 20)
         
         html = browser.page_source
