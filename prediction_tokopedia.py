@@ -32,7 +32,6 @@ def remove_repeated_char(word):
     return re.sub(r'(.)\1+', r'\1', word)
 
 def normalize_text(text):
-    """Gunakan IndoNLP untuk mengganti slang + hilangkan huruf berulang"""
     # Normalisasi slang
     text = replace_slang(text)
     # Hilangkan huruf berulang
