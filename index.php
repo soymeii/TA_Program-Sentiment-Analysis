@@ -13,9 +13,11 @@
     <h1 class="title">Selamat datang di SentimenSense</h1>
     <p class="subtitle">Masukkan URL produk dari Shopee atau Tokopedia untuk menganalisis sentimen review pelanggan.</p>
     <form action="index.php" method="POST">
-        <p>URL Produk (Shopee/Tokopedia) : <input type="text" name="url" placeholder="Masukkan URL Produk" required><br>
-        <!-- input reviw count -->
-        <p>Jumlah Review yang Ingin Diambil : <input type="number" name="review_count" placeholder="Masukkan Jumlah Review" min="1" required><br>
+        <p>URL Produk (Shopee/Tokopedia) : 
+            <input type="text" name="url" placeholder="Masukkan URL Produk" required>
+        </p>
+        <!-- input review count -->
+        <p>Jumlah Review yang Ingin Diambil : <input type="number" name="review_count" placeholder="Masukkan Jumlah Review" min="1" required></p>
         <button class="button button1" type="submit" name="search">Analisis</button>
     </form>
 
@@ -49,7 +51,14 @@
             $excel_path = "C:/xampp/htdocs/TA/Program/result/crawling_from_tokopedia.xlsx"; // buat ngambil account & review
             $prediction_path = "C:/xampp/htdocs/TA/Program/result/preprocessed_from_tokopedia.xlsx"; //buat ngambil label
         } else {
-            die("Domain tidak dikenali. Hanya Shopee & Tokopedia.");
+            // die("Domain tidak dikenali. Hanya Shopee & Tokopedia.");
+            $error = "Domain tidak dikenali. Hanya Shopee & Tokopedia.";
+            echo "<p style='color:red;'><b>" . htmlspecialchars($error) . "</b></p>";
+        }
+
+        // Jika domain salah → stop semua proses
+        if (!empty($error)) {
+            return;
         }
 
         // jalankan Python script
@@ -79,7 +88,6 @@
             echo "<br>";
 
         }
-
 
         // ===================== SHOW CRAWLING RESULT & VALIDATION FORM =================
         if (file_exists($excel_path)) {
@@ -153,7 +161,7 @@
 
             echo "<input type='hidden' name='source' value='".htmlspecialchars($source)."'>";
 
-            // ✅ Tombol Simpan
+            // Tombol Simpan
             echo '<button type="submit" name="validate">VALIDASI ULANG & SIMPAN</button>';
             echo '</form>';
 
@@ -169,6 +177,8 @@
                 $negative_count = count(array_filter($labels_only, fn($x) => strtolower($x) === 'negative'));
                 $total_review = $positive_count + $negative_count;
 
+                $pos_percent = $total_review > 0 ? ($positive_count / $total_review) * 100 : 0;
+                $neg_percent = $total_review > 0 ? ($negative_count / $total_review) * 100 : 0;
                 // echo "<h2>Distribusi Sentimen</h2>";
                 
                 // echo "<canvas id='sentimentChart'></canvas>";
@@ -178,7 +188,6 @@
                         <canvas id='sentimentChart'></canvas>
                     </div>
                 </div>";
-
 
                 // Chart.js script
                 echo "
