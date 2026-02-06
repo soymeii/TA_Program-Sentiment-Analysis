@@ -19,8 +19,9 @@ tfidf = TfidfVectorizer(max_features=2000, ngram_range=(1,2))
 # Mengambil unigram (kata tunggal) dan bigram (2 kata berurutan). Contoh: "tidak bagus" akan jadi dua fitur:tidak, tidak bagus. Untuk mempertimbangkan konteks antar kata
 X = tfidf.fit_transform(reviews)
 y = labels
+#y = df["label"].replace({0: -1, 1: 1}).tolist()
 
-# SPLIT DATA (TRAINING 80% DAN TESTING 20% )
+# SPLIT DATA (TRAINING DAN TESTING )
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.4, random_state=42, stratify=y
 )
@@ -56,21 +57,20 @@ param_grid = {
     'kernel': ['linear', 'rbf', 'poly'],
     'gamma': ['scale', 'auto', 0.01, 0.001],
     'degree': [2, 3, 4, 5],
-    'class_weight': [None, 'balanced'],
-    'shrinking': [True, False]
+    'class_weight': [None, 'balanced']
 }
 # mencoba semua kombinasi parameter dari param_grid dan memilih yang terbaik berdasarkan akurasi rata-rata dari 5-fold cross-validation
 grid = GridSearchCV(
     estimator=SVC(class_weight='balanced'),
     param_grid=param_grid,
-    cv=5, # ini artinya pakai 5-fold cross validation
+    cv=10, # ini artinya pakai 5-fold cross validation
     scoring='accuracy', # kriteria penilaian yang digunakan
     verbose=0, # 2 = menampilkan progres tuning di terminal
-    n_jobs=-1 # gunakan semua core CPU agar proses nya cepat
+    n_jobs=-1 # gunakan semua core CPU agar proses nya cepat (1,2,... = jumlah core yang dipakai)
 )
 
 
-grid.fit(X_train, y_train)
+grid.fit(X_train, y_train) #input svm
 
 print("Selama pelatihan, model dengan parameter terbaik", grid.best_params_)
 print("punya performa rata-rata sebesar", grid.best_score_) #rata-rata akurasi dari model terbaik selama cross-validation.
@@ -89,12 +89,12 @@ save_pickle_path = "C:\\xampp\\htdocs\\TA\\Program\\model\\model.pkl"
 with open(save_pickle_path, 'wb') as f:
     pickle.dump(best_model, f)
 
-print(f"✅ Model saved to: {save_pickle_path}")
+print(f"Model saved to: {save_pickle_path}")
 
 # ==== SAVE TF-IDF VECTOR ====
 save_tfidf_path = r"C:\xampp\htdocs\TA\Program\model\tfidf.pkl"
 with open(save_tfidf_path, 'wb') as f:
     pickle.dump(tfidf, f)
 
-
-print(f"✅TF-IDF Vectorizer saved to: {save_tfidf_path}")
+# Berisi parameter, vocabulary, dan nilai IDF hasil training
+print(f"TF-IDF Vectorizer saved to: {save_tfidf_path}")
