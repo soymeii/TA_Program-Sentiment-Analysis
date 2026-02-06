@@ -17,7 +17,7 @@ if (isset($_POST['validate'])) {
 
     // STEP 3. nge cek terlebih dahulu apakah file sumber (atau hasil preprocessed) ada
     if (!file_exists($sourceFile)) {
-        die("❌ File sumber tidak ditemukan: " . $sourceFile);
+        die("File sumber tidak ditemukan: " . $sourceFile);
     }
 
     // STEP 4.load filesumber
@@ -38,6 +38,10 @@ if (isset($_POST['validate'])) {
     // ===================== DELETE ACCOUNT COLUMN =================
     // STEP 1. load file sumber (hasil preprocessed dengan label)
     $data = $sheet->toArray(null, true, true, true);
+    // null  → nilai default untuk cell kosong
+    // true  → ambil hasil perhitungan jika cell berisi formula
+    // true  → gunakan format tampilan Excel
+    // true  → gunakan huruf kolom (A, B, C) sebagai index array
 
     // STEP 2. hapus kolom account (kolom A)
     foreach ($data as &$row) {
@@ -50,7 +54,7 @@ if (isset($_POST['validate'])) {
 
     // STEP 2. nge cek apakah dataset utama ada
     if (!file_exists($mainDataset)) {
-        die("❌ Dataset utama tidak ditemukan: " . $mainDataset);
+        die("Dataset utama tidak ditemukan: " . $mainDataset);
     }
 
     // STEP 3. load dataset utama
@@ -90,9 +94,9 @@ if (isset($_POST['validate'])) {
     $command = 'python "C:\\xampp\\htdocs\\TA\\Program\\model\\trainingdata.py"';
     exec($command, $output, $status);   // PHP akan menunggu sampai Python selesai
 
-    // ✅ Redirect balik ke index.php dengan pesan notifikasi
+    // Redirect balik ke index.php dengan pesan notifikasi
     echo "<script>
-        alert('✅ Data berhasil divalidasi dan disimpan!');
+        alert('Data berhasil divalidasi dan disimpan!');
         window.location.href = 'index.php';
     </script>";
     exit;
